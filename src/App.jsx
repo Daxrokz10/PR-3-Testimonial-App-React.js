@@ -1,15 +1,11 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// src/App.jsx
+import React from 'react';
 import Form from './components/Form';
 
-function App() {
-
+export default function App() {
   return (
-    <>
-      <Form></Form>
-    </>
-  )
+    <div style={{ padding: 20, background: '#f2f2f2', minHeight: '100vh' }}>
+      <Form />
+    </div>
+  );
 }
-
-export default App
