@@ -47,13 +47,13 @@ const Form = () => {
             </div>
             <div className="form-group">
               <input type="text" id="review" name="review" required placeholder onChange={handleInput} />
-              <label htmlFor="password" className="form-label" data-text="ACCESS_KEY">REVIEW</label>
+              <label htmlFor="password" className="form-label" data-text="REVIEW">REVIEW</label>
             </div>
             <div className="form-group">
               {
                 [...Array(5)].map((_, index) => {
                   const val = index + 1;
-                  return <IoStarSharp key={index} color={val <= (rating || hover) ? "#00f2ea" : "#373737ff"} size={24} style={{ marginRight: '4px', cursor: 'pointer' }} onClick={() => setRating(val)} onMouseEnter={() => setHover(val)} onMouseLeave={() => setHover(0)} />
+                  return <IoStarSharp key={index} color={val <= (rating || hover) ? "#00f2ea" : "#373737ff"} size={24} style={{ marginRight: '4px', cursor: 'pointer', transition: "color 0.25s ease"}} onClick={() => setRating(val)} onMouseEnter={() => setHover(val)} onMouseLeave={() => setHover(0)} />
                 })
               }
             </div>
