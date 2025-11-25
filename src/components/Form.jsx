@@ -16,13 +16,20 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newTestimonial = { ...experience, rating };
+    const newTestimonial = { ...experience, rating, id: Date.now() };
     localStorage.setItem('testimonials', JSON.stringify([...testimonials, newTestimonial]));
     setTestimonials([...testimonials, newTestimonial]);
     e.target.reset();
     setRating(0);
     setHover(0);
   }
+
+  const deleteTestimonial = (id) => {
+    const updatedTestimonials = testimonials.filter(testimonial => testimonial.id !== id);
+    setTestimonials(updatedTestimonials);
+    localStorage.setItem('testimonials', JSON.stringify(updatedTestimonials));
+  }
+
 
   return (
     <StyledWrapper>
@@ -38,22 +45,22 @@ const Form = () => {
               </svg>
               <span>WRITE_REVIEW</span>
             </div>
-            <div className="card-dots"><span style={{background:"#feed00ff"}} /><span style={{background:"#0dff00ff"}} /><span style={{background:"red"}} /></div>
+            <div className="card-dots"><span style={{ background: "#feed00ff" }} /><span style={{ background: "#0dff00ff" }} /><span style={{ background: "red" }} /></div>
           </div>
           <div className="card-body">
             <div className="form-group">
-              <input type="text" id="username" name="username" required placeholder onChange={handleInput} />
+              <input type="text" id="username" name="username" value={experience.username} required placeholder onChange={handleInput} />
               <label htmlFor="username" className="form-label" data-text="USERNAME">USERNAME</label>
             </div>
             <div className="form-group">
-              <input type="text" id="review" name="review" required placeholder onChange={handleInput} />
+              <input type="text" id="review" name="review" value={experience.review} required placeholder onChange={handleInput} />
               <label htmlFor="password" className="form-label" data-text="REVIEW">REVIEW</label>
             </div>
             <div className="form-group">
               {
                 [...Array(5)].map((_, index) => {
                   const val = index + 1;
-                  return <IoStarSharp key={index} color={val <= (rating || hover) ? "#00f2ea" : "#373737ff"} size={24} style={{ marginRight: '4px', cursor: 'pointer', transition: "color 0.25s ease"}} onClick={() => setRating(val)} onMouseEnter={() => setHover(val)} onMouseLeave={() => setHover(0)} />
+                  return <IoStarSharp key={index} color={val <= (rating || hover) ? "#00f2ea" : "#373737ff"} size={24} style={{ marginRight: '4px', cursor: 'pointer', transition: "color 0.25s ease" }} onClick={() => setRating(val)} onMouseEnter={() => setHover(val)} onMouseLeave={() => setHover(0)} />
                 })
               }
             </div>
@@ -89,7 +96,7 @@ const Form = () => {
                 <p className="testimonial-text">{t.review}</p>
 
                 <div className="card-footer">
-            
+                  <button className="delete-btn submit-btn" type='button' style={{color:"maroon"}} onClick={() => deleteTestimonial(t.id)}>DELETE</button>
                 </div>
               </article>
             ))}
@@ -102,6 +109,9 @@ const Form = () => {
 
 const StyledWrapper = styled.div`
   /* --- Root Variables for the component --- */
+  .delete-btn:hover{
+    color:red!important;
+  }
   .glitch-form-wrapper {
     --bg-color: #0d0d0d;
     --primary-color: #00f2ea;
