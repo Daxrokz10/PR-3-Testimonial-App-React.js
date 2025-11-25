@@ -7,7 +7,7 @@ const Form = () => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [experience, setExperience] = useState({});
-  const [testimonials, setTestimonials] = useState([]);
+  const [testimonials, setTestimonials] = useState(localStorage.getItem('testimonials') ? JSON.parse(localStorage.getItem('testimonials')) : []);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -17,7 +17,11 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newTestimonial = { ...experience, rating };
+    localStorage.setItem('testimonials', JSON.stringify([...testimonials, newTestimonial]));
     setTestimonials([...testimonials, newTestimonial]);
+    e.target.reset();
+    setRating(0);
+    setHover(0);
   }
 
   return (
@@ -53,7 +57,7 @@ const Form = () => {
                 })
               }
             </div>
-            <button data-text="INITIATE_CONNECTION" type="submit" className="submit-btn">
+            <button data-text="SUBMIT_TESTIMONIAL" type="submit" className="submit-btn">
               <span className="btn-text">SUBMIT_TESTIMONIAL</span>
             </button>
           </div>
