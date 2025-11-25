@@ -38,7 +38,7 @@ const Form = () => {
               </svg>
               <span>WRITE_REVIEW</span>
             </div>
-            <div className="card-dots"><span /><span /><span /></div>
+            <div className="card-dots"><span style={{background:"#feed00ff"}} /><span style={{background:"#0dff00ff"}} /><span style={{background:"red"}} /></div>
           </div>
           <div className="card-body">
             <div className="form-group">
