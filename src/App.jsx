@@ -4,7 +4,7 @@ import Form from './components/Form';
 
 export default function App() {
   return (
-    <div style={{ padding: 20, background: '#f2f2f2', minHeight: '100vh' }}>
+    <div style={{ padding: 20, minHeight: '100vh' }}>
       <Form />
     </div>
   );
